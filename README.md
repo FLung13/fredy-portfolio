@@ -43,7 +43,7 @@ I am a Computer Science student focused on full-stack development and systems pr
 git clone https://github.com/FLung13/fredy-portfolio.git
 
 # Navigate into the project
-cd portfolio
+cd fredy-portfolio
 
 # Install dependencies
 npm install
