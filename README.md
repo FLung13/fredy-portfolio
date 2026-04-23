@@ -59,7 +59,7 @@ npm run build
 ```
 
 ## 🔗 Links
-GitHub: https://github.com/FLung13
+GitHub: https://github.com/FLung13  
 Portfolio: https://fredylung.vercel.app/
 
 ## 📄 Resume
