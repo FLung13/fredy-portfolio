@@ -1,7 +1,7 @@
 import Hotspot from "./Hotspot";
 import { Monitor, BookOpen, Cpu, Coffee } from "lucide-react";
 import { ArrowDown, FileText } from "lucide-react";
-import workstation from "../assets/workstation.png";
+const workstation = "/workstation.webp";
 
 function Hero() {
   return (
@@ -77,14 +77,13 @@ function Hero() {
 
           <img
             src={workstation}
-            alt="Isometric computer science workstation"
-            className=" 
-                block h-auto w-full
-                select-none
-                [mask-image:linear-gradient(to_bottom,black_78%,transparent_100%)]
-              "
-            draggable="false"
+            alt="Interactive isometric developer workstation"
+            className="block h-auto w-full select-none"
+            width="1536"
+            height="1024"
             fetchPriority="high"
+            decoding="async"
+            draggable="false"
           />
 
           <Hotspot

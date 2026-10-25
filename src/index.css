@@ -1,12 +1,50 @@
 @import "tailwindcss";
 
+:root {
+  font-family: Inter, system-ui, Arial, sans-serif;
+  color: #f8fafc;
+  background-color: #061327;
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+}
+
 html {
   scroll-behavior: smooth;
   scroll-padding-top: 90px;
 }
 
+body {
+  margin: 0;
+  min-width: 320px;
+  background: #061327;
+}
+
+#root {
+  min-height: 100vh;
+}
+
+a,
+button {
+  -webkit-tap-highlight-color: transparent;
+}
+
+button {
+  cursor: pointer;
+}
+
+:focus-visible {
+  outline: 2px solid #67e8f9;
+  outline-offset: 3px;
+}
+
+::selection {
+  background: #0891b2;
+  color: #ffffff;
+}
+
 @media (prefers-reduced-motion: reduce) {
   html {
     scroll-behavior: auto;
-}
+  }
 }
