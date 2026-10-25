@@ -21,38 +21,77 @@ export default function Navbar() {
   const [menuOpen, setMenuOpen] = useState(false);
   const [activeSection, setActiveSection] = useState("home");
 
+
   useEffect(() => {
-    const observer = new IntersectionObserver(
-      (entries) => {
-        const visible = entries
-          .filter((entry) => entry.isIntersecting)
-          .sort(
-            (a, b) =>
-              b.intersectionRatio - a.intersectionRatio
-          );
-
-        if (visible.length > 0) {
-          setActiveSection(visible[0].target.id);
-        }
-      },
-      {
-        rootMargin: "-100px 0px -45% 0px",
-        threshold: [0, 0.1, 0.25, 0.5],
-      }
-    );
-
-    const ids = [
+    const sectionIds = [
       "home",
-      ...navigation.map((item) => item.href.slice(1)),
+      "projects",
+      "education",
+      "skills",
+      "about",
+      "experience",
+      "contact",
     ];
 
-    ids.forEach((id) => {
-      const section = document.getElementById(id);
-      if (section) observer.observe(section);
+    const updateActiveSection = () => {
+      // Account for the sticky navbar
+      const navbarOffset = 120;
+
+      const scrollPosition = window.scrollY + navbarOffset;
+
+      let currentSection = "home";
+
+      for (const id of sectionIds) {
+        const section = document.getElementById(id);
+
+        if (!section) continue;
+
+        if (section.offsetTop <= scrollPosition) {
+          currentSection = id;
+        }
+      }
+
+      // Always highlight Contact when reaching the page bottom
+      const atBottom =
+        window.innerHeight + window.scrollY >=
+        document.documentElement.scrollHeight - 5;
+
+      if (atBottom && document.getElementById("contact")) {
+        currentSection = "contact";
+      }
+
+      setActiveSection((previous) =>
+        previous === currentSection ? previous : currentSection
+      );
+    };
+
+    let ticking = false;
+
+    const handleScroll = () => {
+      if (!ticking) {
+        window.requestAnimationFrame(() => {
+          updateActiveSection();
+          ticking = false;
+        });
+
+        ticking = true;
+      }
+    };
+
+    updateActiveSection();
+
+    window.addEventListener("scroll", handleScroll, {
+      passive: true,
     });
 
-    return () => observer.disconnect();
+    window.addEventListener("resize", handleScroll);
+
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+      window.removeEventListener("resize", handleScroll);
+    };
   }, []);
+
 
   useEffect(() => {
     if (!menuOpen) return;
@@ -100,11 +139,10 @@ export default function Navbar() {
                 key={item.href}
                 href={item.href}
                 aria-current={active ? "location" : undefined}
-                className={`border-b-2 py-2 text-sm font-medium transition ${
-                  active
+                className={`border-b-2 py-2 text-sm font-medium transition ${active
                     ? "border-cyan-400 text-cyan-300"
                     : "border-transparent text-slate-300 hover:text-cyan-300"
-                }`}
+                  }`}
               >
                 {item.label}
               </a>
@@ -149,11 +187,10 @@ export default function Navbar() {
                 key={item.href}
                 href={item.href}
                 onClick={() => setMenuOpen(false)}
-                className={`rounded-lg px-4 py-3 text-sm font-medium transition ${
-                  activeSection === item.href.slice(1)
+                className={`rounded-lg px-4 py-3 text-sm font-medium transition ${activeSection === item.href.slice(1)
                     ? "bg-cyan-400/10 text-cyan-300"
                     : "text-slate-200 hover:bg-cyan-400/10"
-                }`}
+                  }`}
               >
                 {item.label}
               </a>
