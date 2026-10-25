@@ -1,8 +1,12 @@
-import Navbar from './components/Navbar'
-import Hero from './components/Hero'
-import Projects from './components/Projects'
-import About from './components/About'
-import Contact from './components/Contact'
+import Navbar from "./components/Navbar";
+import Hero from "./components/Hero";
+import Projects from "./components/Projects";
+import Education from "./components/Education";
+import Skills from "./components/Skills";
+import About from "./components/About";
+import Experience from "./components/Experience";
+import Contact from "./components/Contact";
+import Footer from "./components/Footer";
 
 function App() {
   return (
@@ -10,28 +14,16 @@ function App() {
       <Navbar />
       <main>
         <Hero />
-
-        <section className="content-shell">
-          <div className="content-grid container">
-            
-            <div className="content-main">
-              <Projects />
-            </div>
-
-            <aside className="content-side">
-              <About />
-            </aside>
-
-          </div>
-
-          <div className="container">
-            <Contact />
-          </div>
-
-        </section>
+        <Projects />
+        <Education />
+        <Skills />
+        <About />
+        <Experience />
+        <Contact />
       </main>
+      <Footer />
     </>
-  )
+  );
 }
 
-export default App
+export default App;
